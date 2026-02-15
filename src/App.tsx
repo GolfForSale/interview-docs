@@ -4,6 +4,8 @@ import Sidebar from './components/Sidebar';
 import JsExercise from './components/JsExercise';
 import ReactExercise from './components/ReactExercise';
 import { exercises } from './data/exercises';
+import { Analytics } from "@vercel/analytics/react"
+
 
 function App() {
   const [selectedId, setSelectedId] = useState(exercises[0].id);
@@ -14,6 +16,7 @@ function App() {
 
   return (
     <div className="app">
+      <Analytics />
       <Sidebar
         exercises={exercises}
         selectedId={selectedId}
