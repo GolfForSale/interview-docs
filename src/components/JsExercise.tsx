@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Editor from '@monaco-editor/react';
 import { Exercise } from '../types';
-import { jsWorkspaces } from '../workspace';
+import { jsWorkspaces, tsWorkspaces } from '../workspace';
 
 interface JsExerciseProps {
   exercise: Exercise;
@@ -13,7 +13,7 @@ const JsExercise: React.FC<JsExerciseProps> = ({ exercise }) => {
   const [showSolution, setShowSolution] = useState(false);
   const mountedRef = useRef(true);
 
-  const runFn = jsWorkspaces[exercise.id];
+  const runFn = jsWorkspaces[exercise.id] ?? tsWorkspaces[exercise.id];
 
   const executeCode = useCallback(() => {
     const logs: string[] = [];
@@ -104,7 +104,9 @@ const JsExercise: React.FC<JsExerciseProps> = ({ exercise }) => {
       <div className="exercise-header">
         <div>
           <h2 className="exercise-title">{exercise.title}</h2>
-          <span className="exercise-badge js-badge">JavaScript</span>
+          <span className={`exercise-badge ${exercise.category === 'typescript' ? 'ts-badge' : 'js-badge'}`}>
+            {exercise.category === 'typescript' ? 'TypeScript' : 'JavaScript'}
+          </span>
         </div>
       </div>
 

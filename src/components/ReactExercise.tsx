@@ -8,11 +8,13 @@ import ErrorBoundary from './ErrorBoundary';
 import CarouselSolution from '../solutions/CarouselSolution';
 import DebounceSolution from '../solutions/DebounceSolution';
 import TicTacToeSolution from '../solutions/TicTacToeSolution';
+import FetchingSolution from '../solutions/FetchingSolution';
 
 const solutionComponents: Record<string, React.ComponentType> = {
   'carousel': CarouselSolution,
   'use-debounce': DebounceSolution,
   'tic-tac-toe': TicTacToeSolution,
+  'fetching': FetchingSolution,
 };
 
 interface ReactExerciseProps {

@@ -23,10 +23,10 @@ function App() {
         onSelect={setSelectedId}
       />
       <main className="main-content">
-        {selectedExercise.category === 'javascript' ? (
-          <JsExercise key={selectedExercise.id} exercise={selectedExercise} />
-        ) : (
+        {selectedExercise.category === 'react' ? (
           <ReactExercise key={selectedExercise.id} exercise={selectedExercise} />
+        ) : (
+          <JsExercise key={selectedExercise.id} exercise={selectedExercise} />
         )}
       </main>
     </div>

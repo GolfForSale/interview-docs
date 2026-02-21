@@ -11,15 +11,24 @@
 import { useState, useEffect, useRef } from 'react';
 
 export default function DebounceSearch() {
-  // Implement:
-  // 1. A search input that updates on every keystroke
-  // 2. A debounced value that only updates after 1s of no typing
-  // 3. Display both current and debounced value
-
+  const [search, setSearch] = useState('')
+  const [debounceSearch, setDebounceSearch] = useState('')
+  const timer = useRef(null)
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  }
+  useEffect(() => {
+    timer.current = setTimeout(() => {
+      setDebounceSearch(search)
+    }, 1000)
+    return () => {
+      clearTimeout(timer.current)
+    }
+  }, [search])
   return (
     <div>
-      <input placeholder="Type to search..." />
-      <p>TODO: implement debounce</p>
+      <input placeholder="Type to search..." onChange={handleChange} />
+      <p>TODO: implement debounce {debounceSearch}</p>
     </div>
   );
 }

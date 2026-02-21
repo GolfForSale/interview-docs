@@ -9,10 +9,13 @@ import { run as customSetTimeoutRun } from './customSetTimeout';
 import { run as mapFilterReduceRun } from './mapFilterReduce';
 import { run as removeDuplicatesRun } from './removeDuplicates';
 import { run as threeLettersDashRun } from './threeLettersDash';
+import { run as binarySearchRun } from './binarySearch';
+import { run as typeCheckRun } from './typeCheck';
 
 import CarouselWorkspace from './Carousel';
 import DebounceSearchWorkspace from './DebounceSearch';
 import TicTacToeWorkspace from './TicTacToe';
+import FetchingWorkspace from './Fetching';
 
 export const jsWorkspaces: Record<string, () => void | Promise<void>> = {
   'memoize': memoizeRun,
@@ -26,10 +29,16 @@ export const jsWorkspaces: Record<string, () => void | Promise<void>> = {
   'map-filter-reduce': mapFilterReduceRun,
   'remove-duplicates': removeDuplicatesRun,
   'three-letters-dash': threeLettersDashRun,
+  'binary-search': binarySearchRun,
+};
+
+export const tsWorkspaces: Record<string, () => void | Promise<void>> = {
+  'type-check': typeCheckRun,
 };
 
 export const reactWorkspaces: Record<string, React.ComponentType> = {
   'use-debounce': DebounceSearchWorkspace,
   'carousel': CarouselWorkspace,
   'tic-tac-toe': TicTacToeWorkspace,
+  'fetching': FetchingWorkspace,
 };

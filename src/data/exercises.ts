@@ -318,6 +318,74 @@ console.log("reduce:", removeDuplicates3(myArray));`,
   },
 
   {
+    id: 'type-check',
+    title: 'TypeCheck Utility Type',
+    category: 'typescript',
+    description:
+      'Write a utility type TypeCheck<T> using conditional types.\nIt should produce:\n  • \'S\' if T is string\n  • \'N\' if T is number\n  • never otherwise\n\nExample:\n  type A = TypeCheck<string>  → \'S\'\n  type B = TypeCheck<number>  → \'N\'\n  type C = TypeCheck<boolean> → never',
+    filePath: 'src/workspace/typeCheck.ts',
+    solution: `type TypeCheck<T> = T extends string
+  ? 'S'
+  : T extends number
+    ? 'N'
+    : never;
+
+// Verification:
+type A = TypeCheck<string>;   // 'S'
+type B = TypeCheck<number>;   // 'N'
+type C = TypeCheck<boolean>;  // never
+type D = TypeCheck<object>;   // never
+type E = TypeCheck<string[]>; // never`,
+    testCases: [
+      { input: 'TypeCheck<string>', expectedOutput: "'S'" },
+      { input: 'TypeCheck<number>', expectedOutput: "'N'" },
+      { input: 'TypeCheck<boolean>', expectedOutput: 'never' },
+      { input: 'TypeCheck<object>', expectedOutput: 'never' },
+      { input: 'TypeCheck<string[]>', expectedOutput: 'never' },
+    ],
+  },
+
+  {
+    id: 'binary-search',
+    title: 'Binary Search',
+    category: 'javascript',
+    description:
+      'Implement binary search on a sorted array. The function should return the index of the target element, or -1 if the element is not found.\nTime complexity should be O(log n).',
+    filePath: 'src/workspace/binarySearch.ts',
+    solution: `const binarySearch = (arr, target) => {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] === target) {
+      return mid;
+    } else if (arr[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return -1;
+};
+
+console.log(binarySearch([1, 3, 5, 7, 9, 11, 13], 7));   // 3
+console.log(binarySearch([1, 3, 5, 7, 9, 11, 13], 1));   // 0
+console.log(binarySearch([1, 3, 5, 7, 9, 11, 13], 13));  // 6
+console.log(binarySearch([1, 3, 5, 7, 9, 11, 13], 4));   // -1
+console.log(binarySearch([], 5));                          // -1`,
+    testCases: [
+      { input: '[1, 3, 5, 7, 9, 11, 13], 7', expectedOutput: '3' },
+      { input: '[1, 3, 5, 7, 9, 11, 13], 1', expectedOutput: '0' },
+      { input: '[1, 3, 5, 7, 9, 11, 13], 13', expectedOutput: '6' },
+      { input: '[1, 3, 5, 7, 9, 11, 13], 4', expectedOutput: '-1' },
+      { input: '[], 5', expectedOutput: '-1' },
+    ],
+  },
+
+  {
     id: 'three-letters-dash',
     title: 'Three Same Letters → Dash',
     category: 'javascript',
@@ -539,7 +607,46 @@ export default function TicTacToe() {
   );
 }`,
   },
+  {
+    id: 'fetching',
+    title: 'Data Fetching with use() + Suspense',
+    category: 'react',
+    description:
+      'Use the React 19 `use` hook together with `<Suspense>` to fetch and display a list of users.\n\n1. Create a promise that fetches from https://jsonplaceholder.typicode.com/users\n2. Inside a component, call `use()` to unwrap the promise\n3. Wrap the component in `<Suspense>` with a loading fallback\n\nThe `use` hook lets you read a promise directly in render — React will suspend the component until the promise resolves.',
+    filePath: 'src/workspace/Fetching.tsx',
+    solution: `import { Suspense, use } from "react";
+
+type User = { name: string }
+
+const fetchUsers = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json());
+
+const UserList = () => {
+  const users = use<User[]>(fetchUsers);
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+
+const Fetching = () => {
+  return (
+    <div>
+      <Suspense fallback={"Loading users"}>
+        <UserList />
+      </Suspense>
+    </div>
+  );
+}
+
+export default Fetching;`,
+  },
 ];
 
 export const jsExercises = exercises.filter(e => e.category === 'javascript');
+export const tsExercises = exercises.filter(e => e.category === 'typescript');
 export const reactExercises = exercises.filter(e => e.category === 'react');

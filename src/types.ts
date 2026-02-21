@@ -1,4 +1,4 @@
-export type ExerciseCategory = 'javascript' | 'react';
+export type ExerciseCategory = 'javascript' | 'typescript' | 'react';
 
 export interface TestCase {
   input: string;
