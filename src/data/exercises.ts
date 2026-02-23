@@ -421,6 +421,40 @@ console.log(handleText("abcdddddef"));`,
     ],
   },
 
+  {
+    id: 'curry',
+    title: 'Curry Function (N args)',
+    category: 'javascript',
+    description:
+      'Implement a curry function that takes a binary function (e.g. add) and allows calling it one argument at a time, for any number of arguments. Call with no arguments to get the final result.\n\nExample:\n  const add = (a, b) => a + b;\n  curry(add)(1)(3)(5)(18)()  → 27\n  curry(add)(10)(20)()       → 30',
+    filePath: 'src/workspace/curry.ts',
+    solution: `const curry = (fn) => {
+  return function curried(...args) {
+    return (arg) => {
+      if (arg === undefined) {
+        return args.reduce(fn);
+      }
+      return curried(...args, arg);
+    };
+  };
+};
+
+const add = (a, b) => a + b;
+
+console.log(curry(add)(1)(3)(5)(18)());   // 27
+console.log(curry(add)(10)(20)());         // 30
+console.log(curry(add)(1)(2)(3)());        // 6
+console.log(curry(add)(5)());              // 5
+console.log(curry(add)(2)(3)(4)(5)(6)()); // 20`,
+    testCases: [
+      { input: 'curry(add)(1)(3)(5)(18)()', expectedOutput: '27' },
+      { input: 'curry(add)(10)(20)()', expectedOutput: '30' },
+      { input: 'curry(add)(1)(2)(3)()', expectedOutput: '6' },
+      { input: 'curry(add)(5)()', expectedOutput: '5' },
+      { input: 'curry(add)(2)(3)(4)(5)(6)()', expectedOutput: '20' },
+    ],
+  },
+
   // ─── REACT EXERCISES ─────────────────────────────────────────────────
   {
     id: 'use-debounce',

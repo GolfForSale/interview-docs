@@ -10,6 +10,7 @@ import { run as mapFilterReduceRun } from './mapFilterReduce';
 import { run as removeDuplicatesRun } from './removeDuplicates';
 import { run as threeLettersDashRun } from './threeLettersDash';
 import { run as binarySearchRun } from './binarySearch';
+import { run as curryRun } from './curry';
 import { run as typeCheckRun } from './typeCheck';
 
 import CarouselWorkspace from './Carousel';
@@ -30,6 +31,7 @@ export const jsWorkspaces: Record<string, () => void | Promise<void>> = {
   'remove-duplicates': removeDuplicatesRun,
   'three-letters-dash': threeLettersDashRun,
   'binary-search': binarySearchRun,
+  'curry': curryRun,
 };
 
 export const tsWorkspaces: Record<string, () => void | Promise<void>> = {
